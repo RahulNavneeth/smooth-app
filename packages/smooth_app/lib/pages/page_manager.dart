@@ -11,6 +11,7 @@ import 'package:smooth_app/widgets/will_pop_scope.dart';
 
 enum BottomNavigationTab {
   Profile,
+  MiniGames,
   Scan,
   List,
 }
@@ -29,6 +30,7 @@ class PageManager extends StatefulWidget {
 class PageManagerState extends State<PageManager> {
   static const List<BottomNavigationTab> _pageKeys = <BottomNavigationTab>[
     BottomNavigationTab.Profile,
+    BottomNavigationTab.MiniGames,
     BottomNavigationTab.Scan,
     BottomNavigationTab.List,
   ];
@@ -36,6 +38,7 @@ class PageManagerState extends State<PageManager> {
   final Map<BottomNavigationTab, GlobalKey<NavigatorState>> _navigatorKeys =
       <BottomNavigationTab, GlobalKey<NavigatorState>>{
     BottomNavigationTab.Profile: GlobalKey<NavigatorState>(),
+    BottomNavigationTab.MiniGames: GlobalKey<NavigatorState>(),
     BottomNavigationTab.Scan: GlobalKey<NavigatorState>(),
     BottomNavigationTab.List: GlobalKey<NavigatorState>(),
   };
@@ -73,6 +76,7 @@ class PageManagerState extends State<PageManager> {
 
     final List<Widget> tabs = <Widget>[
       _buildOffstageNavigator(BottomNavigationTab.Profile),
+      _buildOffstageNavigator(BottomNavigationTab.MiniGames),
       _buildOffstageNavigator(BottomNavigationTab.Scan),
       _buildOffstageNavigator(BottomNavigationTab.List),
     ];
@@ -99,6 +103,10 @@ class PageManagerState extends State<PageManager> {
             SmoothNavigationDestination(
               icon: const icons.Profile(),
               label: appLocalizations.profile_navbar_label,
+            ),
+            const SmoothNavigationDestination(
+              icon: icons.Flag(),
+              label: 'Mini-game?',
             ),
             SmoothNavigationDestination(
               icon: const icons.Search.alt(),

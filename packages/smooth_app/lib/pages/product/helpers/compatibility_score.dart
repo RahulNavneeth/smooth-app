@@ -103,6 +103,13 @@ class _CompatibilityScoreState extends State<CompatibilityScore>
   @override
   Widget build(BuildContext context) {
     context.watch<LocalDatabase>();
+    final double? sugarGrams = widget._product.nutriments
+        ?.getValue(Nutrient.sugars, PerSize.oneHundredGrams);
+    // print(widget._product.nutriments?.toJson().getValueByKeyStartWith('sugar'));
+    final int? sugarCubes =
+        sugarGrams != null ? (sugarGrams / 4).round() : null;
+    print(sugarCubes != null ? '$sugarCubes sugar cube(s)' : 'No data');
+    print(widget._product.barcode);
     refreshUpToDate();
     return InkWell(
       child: ClipRRect(
