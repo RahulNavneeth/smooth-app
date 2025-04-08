@@ -142,7 +142,6 @@ class SugarGuessEngine extends MiniGamesEngine {
             gameArgs: gameArgs) {
     currentStateNotifier = ValueNotifier<GameState>(EmptyState(this));
 
-    // Apply game arguments if provided
     if (gameArgs.containsKey('totalRounds')) {
       totalRounds = gameArgs['totalRounds'];
     }
@@ -173,7 +172,6 @@ class SugarGuessEngine extends MiniGamesEngine {
   }
 
   Future<void> loadProducts() async {
-    // Check if custom product list is provided in gameArgs
     if (gameArgs.containsKey('productList') &&
         gameArgs['productList'] is List<String>) {
       List<String> productList = gameArgs['productList'];
@@ -183,7 +181,6 @@ class SugarGuessEngine extends MiniGamesEngine {
       }
     }
 
-    // Default product list
     List<String> productList = [
       '8886467122446',
       '8901764061257',
