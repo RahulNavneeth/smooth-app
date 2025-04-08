@@ -122,7 +122,6 @@ class ScoreManager {
 
     _scores[gameType]!.sort((a, b) => b.score.compareTo(a.score));
 
-    // Save to local storage after adding a score
     saveScores();
   }
 
@@ -154,7 +153,6 @@ class ScoreManager {
     try {
       final prefs = await SharedPreferences.getInstance();
 
-      // Convert scores to a serializable format
       final Map<String, List<Map<String, dynamic>>> serializedScores = {};
 
       _scores.forEach((gameType, scoreList) {
@@ -167,7 +165,6 @@ class ScoreManager {
             .toList();
       });
 
-      // Convert to JSON and save
       final String jsonString = jsonEncode(serializedScores);
       await prefs.setString(_prefsKey, jsonString);
     } catch (e) {
@@ -182,13 +179,10 @@ class ScoreManager {
 
       if (jsonString == null) return;
 
-      // Decode JSON string
       final Map<String, dynamic> decodedJson = jsonDecode(jsonString);
 
-      // Clear existing scores
       _scores.clear();
 
-      // Populate scores from saved data
       decodedJson.forEach((gameType, scoreListJson) {
         final List<dynamic> scoreList = scoreListJson as List<dynamic>;
         _scores[gameType] = scoreList
